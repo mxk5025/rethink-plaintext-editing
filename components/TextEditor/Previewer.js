@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import path from 'path';
-
+import ToggleButton from './Toggle';
 import css from './style.css';
 
-function PlaintextEditor({ file, write }) {
+function Previewer({ file, setEditMode }) {
   const [value, setValue] = useState('');
 
   useEffect(() => {
@@ -14,16 +14,17 @@ function PlaintextEditor({ file, write }) {
   }, [file]);
 
   return (
-    <div className={css.editor}>
+    <div className={css.preview}>
       <div className={css.title}>{path.basename(file.name)}</div>
       <div className={css.content}>{value}</div>
+      <ToggleButton editMode={false} setEditMode={setEditMode} />
     </div>
   );
 }
 
-PlaintextEditor.propTypes = {
+Previewer.propTypes = {
   file: PropTypes.object,
-  write: PropTypes.func
+  setEditMode: PropTypes.func
 };
 
-export default PlaintextEditor;
+export default Previewer;
